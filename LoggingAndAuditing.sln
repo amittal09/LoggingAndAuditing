@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingAndAuditing", "LoggingAndAuditing\LoggingAndAuditing.csproj", "{8CBF1A43-5D49-472A-93CD-49A36ACB340C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom", "Custom\Custom.csproj", "{C22E556E-AAF2-485E-B24A-FE04D78437AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8CBF1A43-5D49-472A-93CD-49A36ACB340C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CBF1A43-5D49-472A-93CD-49A36ACB340C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CBF1A43-5D49-472A-93CD-49A36ACB340C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C22E556E-AAF2-485E-B24A-FE04D78437AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C22E556E-AAF2-485E-B24A-FE04D78437AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C22E556E-AAF2-485E-B24A-FE04D78437AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C22E556E-AAF2-485E-B24A-FE04D78437AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace LoggingAndAuditing
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
+            Console.Write("test");
         }
     }
 }
