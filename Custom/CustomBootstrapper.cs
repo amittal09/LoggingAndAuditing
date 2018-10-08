@@ -15,14 +15,14 @@ namespace Custom
 
         private ILogger _logger;
 
-        public static CustomBootstrapper Create([CanBeNull] Action<AbpBootstrapperOptions> optionsAction = null)
+        public static CustomBootstrapper Create([CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
         {
             return new CustomBootstrapper();
         }
-        private CustomBootstrapper([CanBeNull] Action<AbpBootstrapperOptions> optionsAction = null)
+        private CustomBootstrapper([CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
         {
 
-            var options = new AbpBootstrapperOptions();
+            var options = new CustomBootstrapperOptions();
             optionsAction?.Invoke(options);
 
             IocManager = options.IocManager;

@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbpBootstrapperOptions.cs" />
+    <Compile Include="CustomBootstrapperOptions.cs" />
     <Compile Include="Aspects\ApplicationCrossCuttingConcerns.cs" />
     <Compile Include="Auditing\AuditedAttribute.cs" />
     <Compile Include="Auditing\AuditInfo.cs" />

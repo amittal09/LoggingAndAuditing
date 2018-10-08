@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Custom
 {
-    public class AbpBootstrapperOptions
+    public class CustomBootstrapperOptions
     {
         public bool DisableAllInterceptors { get; set; }
 
         public IIocManager IocManager { get; set; }
 
-        public AbpBootstrapperOptions()
+        public CustomBootstrapperOptions()
         {
             IocManager = IocManager.Instance;
         }
