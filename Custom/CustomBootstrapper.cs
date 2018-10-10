@@ -1,5 +1,7 @@
 ﻿using Castle.Core.Logging;
+using Custom.Auditing;
 using Custom.Dependency;
+using Custom.Dependency.Installers;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,21 @@ namespace Custom
             if (!options.DisableAllInterceptors)
             {
                 AddInterceptorRegistrars();
+            }
+        }
+
+        public virtual void Initialize()
+        {
+
+            try
+            {
+                IocManager.IocContainer.Install(new CustomComponentInstaller());
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Fatal(ex.ToString(), ex);
+                throw;
             }
         }
         private void AddInterceptorRegistrars()

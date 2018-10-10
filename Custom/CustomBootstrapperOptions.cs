@@ -15,7 +15,7 @@ namespace Custom
 
         public CustomBootstrapperOptions()
         {
-            IocManager = IocManager.Instance;
+            IocManager = Dependency.IocManager.Instance;
         }
     }
 }
