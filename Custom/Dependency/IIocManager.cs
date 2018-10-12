@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Custom.Dependency
 {
-    public interface IIocManager:IIocRegistrar, IIocResolver, IDisposable
+    public interface IIocManager : IIocRegistrar, IIocResolver, IDisposable
     {
+        
         IWindsorContainer IocContainer { get; }
-        bool IsRegistered(Type type);
-
-        bool IsRegistered<T>();
+        new bool IsRegistered(Type type);
+        new bool IsRegistered<T>();
     }
 }

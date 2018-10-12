@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel.Registration;
 using Custom.Auditing;
 using Custom.Dependency;
 using Custom.Dependency.Installers;
@@ -16,6 +17,7 @@ namespace Custom
         public IIocManager IocManager { get; }
 
         private ILogger _logger;
+        protected bool IsDisposed;
 
         public static CustomBootstrapper Create([CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
         {
@@ -42,7 +44,9 @@ namespace Custom
 
             try
             {
+                RegisterBootstrapper();
                 IocManager.IocContainer.Install(new CustomComponentInstaller());
+
 
             }
             catch (Exception ex)
@@ -55,5 +59,24 @@ namespace Custom
         {
             AuditingInterceptorRegistrar.Initialize(IocManager);
         }
+        public virtual void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            IsDisposed = true;
+        }
+        private void RegisterBootstrapper()
+        {
+            if (!IocManager.IsRegistered<CustomBootstrapper>())
+            {
+                IocManager.IocContainer.Register(
+                    Component.For<CustomBootstrapper>().Instance(this)
+                    );
+            }
+        }
+
     }
 }
