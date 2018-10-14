@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Custom.Auditing
 {
-    internal class AuditingInterceptorRegistrar
+    public class AuditingInterceptorRegistrar
     {
         public static void Initialize(IIocManager iocManager)
         {

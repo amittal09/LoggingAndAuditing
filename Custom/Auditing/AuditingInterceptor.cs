@@ -17,6 +17,7 @@ namespace Custom.Auditing
         }
         public void Intercept(IInvocation invocation)
         {
+            Console.WriteLine(invocation.Method.Name);
             if (ApplicationCrossCuttingConcerns.IsApplied(invocation.InvocationTarget, ApplicationCrossCuttingConcerns.Auditing))
             {
                 invocation.Proceed();

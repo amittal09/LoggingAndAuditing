@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Custom.Dependency;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Custom.Auditing
 {
-    public class JsonNetAuditSerializer : IAuditSerializer
+    public class JsonNetAuditSerializer : IAuditSerializer, ITransientDependency
     {
         private readonly IAuditingConfiguration _configuration;
 

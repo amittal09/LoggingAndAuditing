@@ -1,13 +1,11 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.DynamicProxy;
+using Castle.MicroKernel.Registration;
 using Custom;
 using Custom.Auditing;
 using Custom.Dependency;
+using Custom.Modules;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoggingAndAuditing
 {
@@ -16,24 +14,28 @@ namespace LoggingAndAuditing
 
         public static void Main()
         {
-            var obj = CustomBootstrapper.Create();
+            var obj = CustomBootstrapper.Create(typeof(MyStartupModule));
             obj.Initialize();
             obj.IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
+            obj.IocManager.IocContainer.Register(Component.For<IAuditSerializer>().ImplementedBy<JsonNetAuditSerializer>());
+            obj.IocManager.IocContainer.Register(Component.For<IAuditingHelper>().ImplementedBy<AuditingHelper>());
+            obj.IocManager.IocContainer.Register(Component.For<IInterceptor>().ImplementedBy<AuditingInterceptor>());
             obj.IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            Console.Write("test");
-            obj.IocManager.IocContainer.Resolve<MyClass>().MyTest("This should be audited");
+            Console.WriteLine("test");
+            obj.IocManager.IocContainer.Resolve<MyClass>().Dfsfdffsaffsdf("This should be audited");
         }
-
-
     }
 
     [Audited]
     public class MyClass : ITransientDependency
     {
-        public  void MyTest(string param)
+        public void Dfsfdffsaffsdf(string param)
         {
-            Console.WriteLine("My Test");
+            Console.WriteLine(param);
         }
     }
-    
+    class MyStartupModule : CoreModule
+    {
+
+    }
 }
