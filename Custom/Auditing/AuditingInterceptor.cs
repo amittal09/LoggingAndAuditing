@@ -17,7 +17,7 @@ namespace Custom.Auditing
         }
         public void Intercept(IInvocation invocation)
         {
-            Console.WriteLine(invocation.Method.Name);
+            //Console.WriteLine(invocation.Method.Name);
             if (ApplicationCrossCuttingConcerns.IsApplied(invocation.InvocationTarget, ApplicationCrossCuttingConcerns.Auditing))
             {
                 invocation.Proceed();
@@ -29,7 +29,6 @@ namespace Custom.Auditing
                 invocation.Proceed();
                 return;
             }
-
             var auditInfo = _auditingHelper.CreateAuditInfo(invocation.TargetType, invocation.MethodInvocationTarget, invocation.Arguments);
 
             if (invocation.Method.IsAsync())
