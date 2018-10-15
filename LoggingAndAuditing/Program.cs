@@ -14,28 +14,29 @@ namespace LoggingAndAuditing
 
         public static void Main()
         {
-            var obj = CustomBootstrapper.Create(typeof(MyStartupModule));
+            var obj = CustomBootstrapper.Create(typeof(MyStartupModule), (CustomBootstrapperOptions option) => new CustomBootstrapperOptions { DisableAllInterceptors = false });
             obj.Initialize();
-            obj.IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
-            obj.IocManager.IocContainer.Register(Component.For<IAuditSerializer>().ImplementedBy<JsonNetAuditSerializer>());
-            obj.IocManager.IocContainer.Register(Component.For<IAuditingHelper>().ImplementedBy<AuditingHelper>());
-            obj.IocManager.IocContainer.Register(Component.For<IInterceptor>().ImplementedBy<AuditingInterceptor>());
-            obj.IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             Console.WriteLine("test");
-            obj.IocManager.IocContainer.Resolve<MyClass>().Dfsfdffsaffsdf("This should be audited");
+            obj.IocManager.IocContainer.Resolve<MyClass>().MyTestMethod("This should be audited");
+            Console.WriteLine("Over...");
+            Console.ReadKey();
         }
     }
 
     [Audited]
     public class MyClass : ITransientDependency
     {
-        public void Dfsfdffsaffsdf(string param)
+        [Audited]
+        public void MyTestMethod(string param)
         {
             Console.WriteLine(param);
         }
     }
     class MyStartupModule : CoreModule
     {
-
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+        }
     }
 }

@@ -72,6 +72,7 @@ namespace Custom
                 IocManager.Resolve<CoreStartupConfiguration>().Initialize();
 
                 _moduleManager = IocManager.Resolve<CoreModuleManager>();
+
                 _moduleManager.Initialize(StartupModule);
                 _moduleManager.StartModules();
             }

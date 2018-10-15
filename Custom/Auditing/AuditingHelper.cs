@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Internal;
+using Custom.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Custom.Auditing
 {
-    public class AuditingHelper : IAuditingHelper
+    public class AuditingHelper : IAuditingHelper, ITransientDependency
     {
         private readonly IAuditingConfiguration _configuration;
         private readonly IAuditSerializer _auditSerializer;
