@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Reflection.Extensions
+namespace Vestas.Reflection.Extensions
 {
     public static class TypeExtensions
     {

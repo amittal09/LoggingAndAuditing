@@ -1,10 +1,10 @@
 ﻿using Castle.Core.Logging;
-using Custom.Collections.Extensions;
+using Vestas.Collections.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-namespace Custom.Reflection
+namespace Vestas.Reflection
 {
     public class TypeFinder : ITypeFinder
     {

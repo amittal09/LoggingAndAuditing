@@ -1,13 +1,9 @@
-﻿using Custom.Collections.Extensions;
-using Custom.Services;
+﻿using Vestas.Collections.Extensions;
+using Vestas.Services;
 using JetBrains.Annotations;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Custom.Aspects
+namespace Vestas.Aspects
 {
     internal static class ApplicationCrossCuttingConcerns
     {

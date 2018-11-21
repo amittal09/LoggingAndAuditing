@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Auditing
+namespace Vestas.Auditing
 {
    public class AuditingContractResolver : CamelCasePropertyNamesContractResolver
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vestas.Auditing
+namespace Vestas.Logging
 {
-    public interface IAuditSerializer
+    public interface IHasLogSeverity
     {
-        string Serialize(object obj);
+        LogSeverity Severity { get; set; }
     }
 }

@@ -64,9 +64,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Custom\Custom.csproj">
+    <ProjectReference Include="..\Custom\VestasFramework.csproj">
       <Project>{c22e556e-aaf2-485e-b24a-fe04d78437ab}</Project>
-      <Name>Custom</Name>
+      <Name>VestasFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

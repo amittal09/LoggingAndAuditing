@@ -1,11 +1,11 @@
-﻿using Custom.Collections.Extensions;
+﻿using Vestas.Collections.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Configuration
+namespace Vestas.Configuration
 {
     public class DictionaryBasedConfig : IDictionaryBasedConfig
     {

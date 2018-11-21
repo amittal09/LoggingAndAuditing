@@ -5,25 +5,25 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom
+namespace Vestas
 {
-    public class CoreInitializationException :CoreException
+    public class VestasException :Exception
     {
-        public CoreInitializationException()
+        public VestasException()
         {
 
         }
-        public CoreInitializationException(SerializationInfo serializationInfo, StreamingContext context)
+        public VestasException(SerializationInfo serializationInfo, StreamingContext context)
             : base(serializationInfo, context)
         {
 
         }
-        public CoreInitializationException(string message)
+        public VestasException(string message)
             : base(message)
         {
 
         }
-        public CoreInitializationException(string message, Exception innerException)
+        public VestasException(string message, Exception innerException)
             : base(message, innerException)
         {
 

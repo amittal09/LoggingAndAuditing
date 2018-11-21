@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Dependency
+namespace Vestas.Dependency
 {
     public interface IIocManager : IIocRegistrar, IIocResolver, IDisposable
     {

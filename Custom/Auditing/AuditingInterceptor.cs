@@ -1,11 +1,11 @@
 ﻿using Castle.DynamicProxy;
-using Custom.Aspects;
-using Custom.Threading;
+using Vestas.Aspects;
+using Vestas.Threading;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Custom.Auditing
+namespace Vestas.Auditing
 {
     public class AuditingInterceptor : IInterceptor
     {

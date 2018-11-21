@@ -1,20 +1,20 @@
 ﻿using Castle.Core.Logging;
-using Custom.Collections.Extensions;
-using Custom.Configuration.Startup;
-using Custom.Dependency;
+using Vestas.Collections.Extensions;
+using Vestas.Configuration.Startup;
+using Vestas.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    public class CoreModule
+    public class VestasModule
     {
         protected internal IIocManager IocManager { get; internal set; }
-        protected internal ICoreStartupConfiguration Configuration { get; internal set; }
+        protected internal IVestasStartupConfiguration Configuration { get; internal set; }
         public ILogger Logger { get; set; }
-        protected CoreModule()
+        protected VestasModule()
         {
             Logger = NullLogger.Instance;
         }
@@ -45,13 +45,13 @@ namespace Custom.Modules
                 typeInfo.IsClass &&
                 !typeInfo.IsAbstract &&
                 !typeInfo.IsGenericType &&
-                typeof(CoreModule).IsAssignableFrom(type);
+                typeof(VestasModule).IsAssignableFrom(type);
         }
         public static List<Type> FindDependedModuleTypes(Type moduleType)
         {
             if (!IsCoreModule(moduleType))
             {
-                throw new CoreInitializationException("This type is not an core module: " + moduleType.AssemblyQualifiedName);
+                throw new VestasInitializationException("This type is not an core module: " + moduleType.AssemblyQualifiedName);
             }
 
             var list = new List<Type>();
@@ -75,7 +75,7 @@ namespace Custom.Modules
         {
             var list = new List<Type>();
             AddModuleAndDependenciesRecursively(list, moduleType);
-            list.AddIfNotContains(typeof(CoreKernelModule));
+            list.AddIfNotContains(typeof(VestasKernelModule));
             return list;
         }
 
@@ -83,7 +83,7 @@ namespace Custom.Modules
         {
             if (!IsCoreModule(module))
             {
-                throw new CoreInitializationException("This type is not an Core module: " + module.AssemblyQualifiedName);
+                throw new VestasInitializationException("This type is not an Core module: " + module.AssemblyQualifiedName);
             }
 
             if (modules.Contains(module))

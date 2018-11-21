@@ -1,35 +1,35 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
-using Custom.Auditing;
-using Custom.Configuration.Startup;
-using Custom.Dependency;
-using Custom.Dependency.Installers;
-using Custom.Modules;
+using Vestas.Auditing;
+using Vestas.Configuration.Startup;
+using Vestas.Dependency;
+using Vestas.Dependency.Installers;
+using Vestas.Modules;
 using JetBrains.Annotations;
 using System;
 using System.Reflection;
 
-namespace Custom
+namespace Vestas
 {
-    public class CustomBootstrapper : IDisposable
+    public class VestasBootstrapper : IDisposable
     {
         public Type StartupModule { get; }
         public IIocManager IocManager { get; }
         protected bool IsDisposed;
 
-        private CoreModuleManager _moduleManager;
+        private VestasModuleManager _moduleManager;
         private ILogger _logger;
 
-        private CustomBootstrapper([NotNull] Type startupModule, [CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
+        private VestasBootstrapper([NotNull] Type startupModule, [CanBeNull] Action<VestasBootstrapperOptions> optionsAction = null)
         {
             Check.NotNull(startupModule, nameof(startupModule));
 
-            var options = new CustomBootstrapperOptions();
+            var options = new VestasBootstrapperOptions();
             optionsAction?.Invoke(options);
 
-            if (!typeof(CoreModule).GetTypeInfo().IsAssignableFrom(startupModule))
+            if (!typeof(VestasModule).GetTypeInfo().IsAssignableFrom(startupModule))
             {
-                throw new ArgumentException($"{nameof(startupModule)} should be derived from {nameof(CoreModule)}.");
+                throw new ArgumentException($"{nameof(startupModule)} should be derived from {nameof(VestasModule)}.");
             }
 
             StartupModule = startupModule;
@@ -44,15 +44,15 @@ namespace Custom
             }
         }
 
-        public static CustomBootstrapper Create<TStartupModule>([CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
-            where TStartupModule : CoreModule
+        public static VestasBootstrapper Create<TStartupModule>([CanBeNull] Action<VestasBootstrapperOptions> optionsAction = null)
+            where TStartupModule : VestasModule
         {
-            return new CustomBootstrapper(typeof(TStartupModule), optionsAction);
+            return new VestasBootstrapper(typeof(TStartupModule), optionsAction);
         }
 
-        public static CustomBootstrapper Create([NotNull] Type startupModule, [CanBeNull] Action<CustomBootstrapperOptions> optionsAction = null)
+        public static VestasBootstrapper Create([NotNull] Type startupModule, [CanBeNull] Action<VestasBootstrapperOptions> optionsAction = null)
         {
-            return new CustomBootstrapper(startupModule, optionsAction);
+            return new VestasBootstrapper(startupModule, optionsAction);
         }
 
         private void AddInterceptorRegistrars()
@@ -67,11 +67,11 @@ namespace Custom
             try
             {
                 RegisterBootstrapper();
-                IocManager.IocContainer.Install(new CustomComponentInstaller());
+                IocManager.IocContainer.Install(new VestasComponentInstaller());
 
-                IocManager.Resolve<CoreStartupConfiguration>().Initialize();
+                IocManager.Resolve<VestasStartupConfiguration>().Initialize();
 
-                _moduleManager = IocManager.Resolve<CoreModuleManager>();
+                _moduleManager = IocManager.Resolve<VestasModuleManager>();
 
                 _moduleManager.Initialize(StartupModule);
                 _moduleManager.StartModules();
@@ -87,16 +87,16 @@ namespace Custom
         {
             if (IocManager.IsRegistered<ILoggerFactory>())
             {
-                _logger = IocManager.Resolve<ILoggerFactory>().Create(typeof(CustomBootstrapper));
+                _logger = IocManager.Resolve<ILoggerFactory>().Create(typeof(VestasBootstrapper));
             }
         }
 
         private void RegisterBootstrapper()
         {
-            if (!IocManager.IsRegistered<CustomBootstrapper>())
+            if (!IocManager.IsRegistered<VestasBootstrapper>())
             {
                 IocManager.IocContainer.Register(
-                    Component.For<CustomBootstrapper>().Instance(this)
+                    Component.For<VestasBootstrapper>().Instance(this)
                     );
             }
         }

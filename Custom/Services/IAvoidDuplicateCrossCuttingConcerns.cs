@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Services
+namespace Vestas.Services
 {
     public interface IAvoidDuplicateCrossCuttingConcerns
     {

@@ -1,4 +1,4 @@
-﻿using Custom.Dependency;
+﻿using Vestas.Dependency;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Auditing
+namespace Vestas.Auditing
 {
     public class JsonNetAuditSerializer : IAuditSerializer, ITransientDependency
     {

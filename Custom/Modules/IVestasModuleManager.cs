@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    public interface ICoreModuleManager
+    public interface IVestasModuleManager
     {
-        CoreModuleInfo StartupModule { get; }
+        VestasModuleInfo StartupModule { get; }
 
-        IReadOnlyList<CoreModuleInfo> Modules { get; }
+        IReadOnlyList<VestasModuleInfo> Modules { get; }
         void Initialize(Type startupModule);
 
         void StartModules();

@@ -1,21 +1,21 @@
-﻿using Custom.Auditing;
-using Custom.Dependency;
+﻿using Vestas.Auditing;
+using Vestas.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Configuration.Startup
+namespace Vestas.Configuration.Startup
 {
-    public class CoreStartupConfiguration : DictionaryBasedConfig, ICoreStartupConfiguration
+    public class VestasStartupConfiguration : DictionaryBasedConfig, IVestasStartupConfiguration
     {
         public IIocManager IocManager { get; }
         public IAuditingConfiguration Auditing { get; private set; }
         public IModuleConfigurations Modules { get; private set; }
 
         public Dictionary<Type, Action> ServiceReplaceActions { get; private set; }
-        public CoreStartupConfiguration(IIocManager iocManager)
+        public VestasStartupConfiguration(IIocManager iocManager)
         {
             IocManager = iocManager;
         }

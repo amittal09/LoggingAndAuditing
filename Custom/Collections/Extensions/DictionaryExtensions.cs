@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Collections.Extensions
+namespace Vestas.Collections.Extensions
 {
     public static class DictionaryExtensions
     {

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Threading
+namespace Vestas.Threading
 {
     internal static class InternalAsyncHelper
     {

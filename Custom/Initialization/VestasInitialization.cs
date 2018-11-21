@@ -1,13 +1,13 @@
-﻿using Custom.Dependency;
+﻿using Vestas.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    public  abstract class CustomInitialization
+    public  abstract class VestasInitialization
     {
         protected internal IIocManager IocManager { get; internal set; }
     }

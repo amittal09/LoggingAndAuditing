@@ -1,4 +1,4 @@
-﻿using Custom.Modules;
+﻿using Vestas.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +6,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Reflection
+namespace Vestas.Reflection
 {
-    public class CoreAssemblyFinder : IAssemblyFinder
+    public class VestasAssemblyFinder : IAssemblyFinder
     {
-        private readonly ICoreModuleManager _moduleManager;
+        private readonly IVestasModuleManager _moduleManager;
 
-        public CoreAssemblyFinder(ICoreModuleManager moduleManager)
+        public VestasAssemblyFinder(IVestasModuleManager moduleManager)
         {
             _moduleManager = moduleManager;
         }

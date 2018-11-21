@@ -1,5 +1,5 @@
-﻿using Custom.Collections.Extensions;
-using Custom.Extensions;
+﻿using Vestas.Collections.Extensions;
+using Vestas.Extensions;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom
+namespace Vestas
 {
     [DebuggerStepThrough]
     public static class Check

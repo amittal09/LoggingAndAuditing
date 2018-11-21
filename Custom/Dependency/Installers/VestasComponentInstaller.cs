@@ -6,24 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Custom.Auditing;
-using Custom.Configuration.Startup;
-using Custom.Reflection;
-using Custom.Modules;
+using Vestas.Auditing;
+using Vestas.Configuration.Startup;
+using Vestas.Reflection;
+using Vestas.Modules;
 
-namespace Custom.Dependency.Installers
+namespace Vestas.Dependency.Installers
 {
-    public class CustomComponentInstaller : IWindsorInstaller
+    public class VestasComponentInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
             Component.For<IAuditingConfiguration, AuditingConfiguration>().ImplementedBy<AuditingConfiguration>().LifestyleSingleton(),
             Component.For<IModuleConfigurations, ModuleConfigurations>().ImplementedBy<ModuleConfigurations>().LifestyleSingleton(),
-            Component.For<ICoreStartupConfiguration, CoreStartupConfiguration>().ImplementedBy<CoreStartupConfiguration>().LifestyleSingleton(),
+            Component.For<IVestasStartupConfiguration, VestasStartupConfiguration>().ImplementedBy<VestasStartupConfiguration>().LifestyleSingleton(),
             Component.For<ITypeFinder, TypeFinder>().ImplementedBy<TypeFinder>().LifestyleSingleton(),
-            Component.For<ICoreModuleManager, CoreModuleManager>().ImplementedBy<CoreModuleManager>().LifestyleSingleton(),
-            Component.For<IAssemblyFinder, CoreAssemblyFinder>().ImplementedBy<CoreAssemblyFinder>().LifestyleSingleton()
+            Component.For<IVestasModuleManager, VestasModuleManager>().ImplementedBy<VestasModuleManager>().LifestyleSingleton(),
+            Component.For<IAssemblyFinder, VestasAssemblyFinder>().ImplementedBy<VestasAssemblyFinder>().LifestyleSingleton()
            );
         }
     }

@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Registration;
 using System.Reflection;
 
-namespace Custom.Dependency
+namespace Vestas.Dependency
 {
     public class BasicConventionalRegistrar : IConventionalDependencyRegistrar
     {

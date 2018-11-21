@@ -1,32 +1,31 @@
-﻿using Custom.Collections.Extensions;
-using Custom.Configuration.Startup;
-using Custom.Dependency;
-using Custom.Modules;
-using Custom.Reflection.Extensions;
+﻿using Vestas.Collections.Extensions;
+using Vestas.Configuration.Startup;
+using Vestas.Dependency;
+using Vestas.Modules;
+using Vestas.Reflection.Extensions;
 using System.IO;
 using System.Linq.Expressions;
 
-namespace Custom
+namespace Vestas
 {
-    public sealed class CoreKernelModule :CoreModule
+    public sealed class VestasKernelModule :VestasModule
     {
         public override void PreInitialize()
         {
             IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
 
-
             AddIgnoredTypes();
         }
         public override void Initialize()
         {
-            foreach (var replaceAction in ((CoreStartupConfiguration)Configuration).ServiceReplaceActions.Values)
+            foreach (var replaceAction in ((VestasStartupConfiguration)Configuration).ServiceReplaceActions.Values)
             {
                 replaceAction();
             }
 
 
 
-            IocManager.RegisterAssemblyByConvention(typeof(CoreKernelModule).GetAssembly(),
+            IocManager.RegisterAssemblyByConvention(typeof(VestasKernelModule).GetAssembly(),
                 new ConventionalRegistrationConfig
                 {
                     InstallInstallers = false

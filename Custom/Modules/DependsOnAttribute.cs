@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
     public class DependsOnAttribute :Attribute
     {

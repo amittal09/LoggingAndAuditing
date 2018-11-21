@@ -1,14 +1,14 @@
-﻿using Custom.Collections.Extensions;
+﻿using Vestas.Collections.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    internal class CoreModuleCollection : List<CoreModuleInfo>
+    internal class VestasModuleCollection : List<VestasModuleInfo>
     {
         public Type StartupModuleType { get; }
 
-        public CoreModuleCollection(Type startupModuleType)
+        public VestasModuleCollection(Type startupModuleType)
         {
             StartupModuleType = startupModuleType;
         }
@@ -18,12 +18,12 @@ namespace Custom.Modules
         /// </summary>
         /// <typeparam name="TModule">Module type</typeparam>
         /// <returns>Reference to the module instance</returns>
-        public TModule GetModule<TModule>() where TModule : CoreModule
+        public TModule GetModule<TModule>() where TModule : VestasModule
         {
             var module = this.FirstOrDefault(m => m.Type == typeof(TModule));
             if (module == null)
             {
-                throw new CoreException("Can not find module for " + typeof(TModule).FullName);
+                throw new VestasException("Can not find module for " + typeof(TModule).FullName);
             }
 
             return (TModule)module.Instance;
@@ -34,7 +34,7 @@ namespace Custom.Modules
         /// If module A depends on module B, A comes after B in the returned List.
         /// </summary>
         /// <returns>Sorted list</returns>
-        public List<CoreModuleInfo> GetSortedModuleListByDependency()
+        public List<VestasModuleInfo> GetSortedModuleListByDependency()
         {
             var sortedModules = this.SortByDependencies(x => x.Dependencies);
             EnsureKernelModuleToBeFirst(sortedModules);
@@ -42,9 +42,9 @@ namespace Custom.Modules
             return sortedModules;
         }
 
-        public static void EnsureKernelModuleToBeFirst(List<CoreModuleInfo> modules)
+        public static void EnsureKernelModuleToBeFirst(List<VestasModuleInfo> modules)
         {
-            var kernelModuleIndex = modules.FindIndex(m => m.Type == typeof(CoreKernelModule));
+            var kernelModuleIndex = modules.FindIndex(m => m.Type == typeof(VestasKernelModule));
             if (kernelModuleIndex <= 0)
             {
                 //It's already the first!
@@ -56,7 +56,7 @@ namespace Custom.Modules
             modules.Insert(0, kernelModule);
         }
 
-        public static void EnsureStartupModuleToBeLast(List<CoreModuleInfo> modules, Type startupModuleType)
+        public static void EnsureStartupModuleToBeLast(List<VestasModuleInfo> modules, Type startupModuleType)
         {
             var startupModuleIndex = modules.FindIndex(m => m.Type == startupModuleType);
             if (startupModuleIndex >= modules.Count - 1)

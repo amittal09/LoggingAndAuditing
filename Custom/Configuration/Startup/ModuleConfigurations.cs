@@ -1,10 +1,10 @@
-﻿namespace Custom.Configuration.Startup
+﻿namespace Vestas.Configuration.Startup
 {
     internal class ModuleConfigurations : IModuleConfigurations
     {
-        public ICoreStartupConfiguration CoreConfiguration { get; private set; }
+        public IVestasStartupConfiguration CoreConfiguration { get; private set; }
 
-        public ModuleConfigurations(ICoreStartupConfiguration coreConfiguration)
+        public ModuleConfigurations(IVestasStartupConfiguration coreConfiguration)
         {
             CoreConfiguration = coreConfiguration;
         }

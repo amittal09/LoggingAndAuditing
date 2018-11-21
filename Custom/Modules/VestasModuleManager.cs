@@ -1,26 +1,26 @@
 ﻿using Castle.Core.Logging;
-using Custom.Configuration.Startup;
-using Custom.Dependency;
+using Vestas.Configuration.Startup;
+using Vestas.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    public class CoreModuleManager :ICoreModuleManager
+    public class VestasModuleManager :IVestasModuleManager
     {
-        public CoreModuleInfo StartupModule { get; private set; }
+        public VestasModuleInfo StartupModule { get; private set; }
 
-        public IReadOnlyList<CoreModuleInfo> Modules => _modules.ToImmutableList();
+        public IReadOnlyList<VestasModuleInfo> Modules => _modules.ToImmutableList();
 
         public ILogger Logger { get; set; }
 
-        private CoreModuleCollection _modules;
+        private VestasModuleCollection _modules;
 
         private readonly IIocManager _iocManager;
 
-        public CoreModuleManager(IIocManager iocManager)
+        public VestasModuleManager(IIocManager iocManager)
         {
             _iocManager = iocManager;
             Logger = NullLogger.Instance;
@@ -28,7 +28,7 @@ namespace Custom.Modules
 
         public virtual void Initialize(Type startupModule)
         {
-            _modules = new CoreModuleCollection(startupModule);
+            _modules = new VestasModuleCollection(startupModule);
             LoadAllModules();
         }
 
@@ -75,7 +75,7 @@ namespace Custom.Modules
         {
             plugInModuleTypes = new List<Type>();
 
-            var modules = CoreModule.FindDependedModuleTypesRecursivelyIncludingGivenModule(_modules.StartupModuleType);
+            var modules = VestasModule.FindDependedModuleTypesRecursivelyIncludingGivenModule(_modules.StartupModuleType);
             
             return modules;
         }
@@ -84,16 +84,16 @@ namespace Custom.Modules
         {
             foreach (var moduleType in moduleTypes)
             {
-                var moduleObject = _iocManager.Resolve(moduleType) as CoreModule;
+                var moduleObject = _iocManager.Resolve(moduleType) as VestasModule;
                 if (moduleObject == null)
                 {
-                    throw new CoreInitializationException("This type is not an Core module: " + moduleType.AssemblyQualifiedName);
+                    throw new VestasInitializationException("This type is not an Core module: " + moduleType.AssemblyQualifiedName);
                 }
 
                 moduleObject.IocManager = _iocManager;
-                moduleObject.Configuration = _iocManager.Resolve<ICoreStartupConfiguration>();
+                moduleObject.Configuration = _iocManager.Resolve<IVestasStartupConfiguration>();
 
-                var moduleInfo = new CoreModuleInfo(moduleType, moduleObject, plugInModuleTypes.Contains(moduleType));
+                var moduleInfo = new VestasModuleInfo(moduleType, moduleObject, plugInModuleTypes.Contains(moduleType));
 
                 _modules.Add(moduleInfo);
 
@@ -121,12 +121,12 @@ namespace Custom.Modules
                 moduleInfo.Dependencies.Clear();
 
                 //Set dependencies for defined DependsOnAttribute attribute(s).
-                foreach (var dependedModuleType in CoreModule.FindDependedModuleTypes(moduleInfo.Type))
+                foreach (var dependedModuleType in VestasModule.FindDependedModuleTypes(moduleInfo.Type))
                 {
                     var dependedModuleInfo = _modules.FirstOrDefault(m => m.Type == dependedModuleType);
                     if (dependedModuleInfo == null)
                     {
-                        throw new CoreInitializationException("Could not find a depended module " + dependedModuleType.AssemblyQualifiedName + " for " + moduleInfo.Type.AssemblyQualifiedName);
+                        throw new VestasInitializationException("Could not find a depended module " + dependedModuleType.AssemblyQualifiedName + " for " + moduleInfo.Type.AssemblyQualifiedName);
                     }
 
                     if ((moduleInfo.Dependencies.FirstOrDefault(dm => dm.Type == dependedModuleType) == null))

@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Custom.Modules
+namespace Vestas.Modules
 {
-    public class CoreModuleInfo
+    public class VestasModuleInfo
     {
         public Assembly Assembly { get; }
         public Type Type { get; }
-        public CoreModule Instance { get; }
+        public VestasModule Instance { get; }
         public bool IsLoadedAsPlugIn { get; }
-        public List<CoreModuleInfo> Dependencies { get; }
-        public CoreModuleInfo([NotNull] Type type, [NotNull] CoreModule instance, bool isLoadedAsPlugIn)
+        public List<VestasModuleInfo> Dependencies { get; }
+        public VestasModuleInfo([NotNull] Type type, [NotNull] VestasModule instance, bool isLoadedAsPlugIn)
         {
             Check.NotNull(type, nameof(type));
             Check.NotNull(instance, nameof(instance));
@@ -22,7 +22,7 @@ namespace Custom.Modules
             IsLoadedAsPlugIn = isLoadedAsPlugIn;
             Assembly = Type.GetTypeInfo().Assembly;
 
-            Dependencies = new List<CoreModuleInfo>();
+            Dependencies = new List<VestasModuleInfo>();
         }
 
         public override string ToString()
